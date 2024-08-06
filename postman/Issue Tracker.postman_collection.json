@@ -1,0 +1,97 @@
+{
+	"info": {
+		"_postman_id": "9dbfc4a4-ab0d-48d5-83c1-bf913dad1c4b",
+		"name": "Issue Tracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "25826742"
+	},
+	"item": [
+		{
+			"name": "list issue",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local_url}}/api/issue/list?issue_id=2&q=Qui",
+					"host": [
+						"{{local_url}}"
+					],
+					"path": [
+						"api",
+						"issue",
+						"list"
+					],
+					"query": [
+						{
+							"key": "paginate",
+							"value": "100",
+							"description": "default is 20",
+							"disabled": true
+						},
+						{
+							"key": "issue_id",
+							"value": "2",
+							"description": "To show the details of the issue"
+						},
+						{
+							"key": "status",
+							"value": "solved",
+							"description": "to_do or solved will only be the value",
+							"disabled": true
+						},
+						{
+							"key": "label",
+							"value": "1",
+							"description": "label id must be passed",
+							"disabled": true
+						},
+						{
+							"key": "q",
+							"value": "Qui",
+							"description": "This is the search query"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list labels",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{local_url}}/api/labels/list"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "local_url",
+			"value": "http://localhost:8000",
+			"type": "string"
+		}
+	]
+}
