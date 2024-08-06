@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   env: {
-    url: "https://jsonplaceholder.typicode.com",
+    url: "https://localhost:8000",
   },
 };
 
