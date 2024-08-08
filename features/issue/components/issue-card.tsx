@@ -52,6 +52,10 @@ const IssueCard = ({
           </div>
         </CardTitle>
       </CardHeader>
+      <CardFooter className="flex justify-between items-center">
+        <p className="text-sm capitalize">{issue.label}</p>
+        <p className="text-xs">{issue.created_date}</p>
+      </CardFooter>
     </Card>
   );
 };

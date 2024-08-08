@@ -5,9 +5,9 @@ export const issueSchema = z.object({
   id: z.string(),
   name: z.string(),
   status: z.enum(["to_do", "solved"]),
-  label_id: z.string(),
-  created_at: z.string(),
-  updated_at: z.string(),
+  label: z.string(),
+  created_date: z.string(),
+  created_time: z.string(),
 });
 
 export const issueListSchema = z.object({

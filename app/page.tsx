@@ -13,7 +13,6 @@ export default function Home({ searchParams }: { searchParams: QueryParams }) {
     <main className="flex min-h-screen flex-col items-center p-8 md:p-24">
       <h1 className="text-4xl font-bold mb-8">Issue Tracker</h1>
       <FilterForm />
-
       <IssueSection
         q={q}
         paginate={paginate}
