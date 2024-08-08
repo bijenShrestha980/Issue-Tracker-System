@@ -1,11 +1,38 @@
 "use client";
 
-import { useIssues } from "../api/get-issues";
+import CardSkeleton from "@/components/card-skeleton";
 import IssueCard from "./issue-card";
+import { useIssues } from "../api/get-issues";
+import { QueryParams } from "@/types";
 
-const IssueSection = () => {
-  const { data: issues, isLoading, error } = useIssues();
+const IssueSection = ({
+  paginate,
+  issue_id,
+  status,
+  label,
+  q,
+}: QueryParams) => {
+  const {
+    data: issues,
+    isLoading,
+    error,
+  } = useIssues({
+    ...(paginate && { paginate }),
+    ...(issue_id && { issue_id }),
+    ...(status && { status }),
+    ...(label && { label }),
+    ...(q && { q }),
+  });
 
+  if (isLoading) {
+    return (
+      <div className="w-full grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+        {[...Array(15)].map((_, i) => (
+          <CardSkeleton key={i} />
+        ))}
+      </div>
+    );
+  }
   if (error) {
     return (
       <div className="w-full h-full flex justify-center items-center">
@@ -13,29 +40,23 @@ const IssueSection = () => {
       </div>
     );
   }
-  if (!issues) {
+  if (!issues || issues?.issues.length === 0) {
     return (
-      <div className="w-full h-full flex justify-center items-center">
+      <div className="w-full h-full flex justify-center items-center py-4">
         <p>No issues found!</p>
       </div>
     );
   }
   return (
-    <div className="flex flex-col gap-4 mb-4">
-      <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
-        {issues?.data.length === 0 ? (
-          <p>No issues found!</p>
-        ) : (
-          issues?.data.map((issue) => (
-            <IssueCard
-              key={issue.id}
-              issue={issue}
-              isLoading={isLoading}
-              error={error}
-            />
-          ))
-        )}
-      </div>
+    <div className="w-full grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+      {issues?.issues.map((issue) => (
+        <IssueCard
+          key={issue.id}
+          issue={issue}
+          isLoading={isLoading}
+          error={error}
+        />
+      ))}
     </div>
   );
 };

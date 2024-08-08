@@ -15,7 +15,7 @@ import {
 
 import { useLabels } from "@/features/label/api/get-labels";
 
-const Form = () => {
+const FilterForm = () => {
   const {
     data: labels,
     isLoading: labelsIsLoading,
@@ -59,7 +59,6 @@ const Form = () => {
   };
 
   const handleClear = () => {
-    console.log("first");
     const params = new URLSearchParams(searchParams);
     params.delete("q");
     params.delete("label");
@@ -80,20 +79,20 @@ const Form = () => {
         onValueChange={(value) => {
           handleLabelFilter(value);
         }}
-        value={searchParams.get("label")?.toString()}
+        // value={
+        //   labels?.labels.find((label) => label.id === searchParams.get("label"))
+        //     ?.name
+        // }
       >
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Labels" />
         </SelectTrigger>
         <SelectContent>
-          {labels?.data.map((label, i) => (
+          {labels?.labels.map((label, i) => (
             <SelectItem key={i} value={label.id} className="capitalize">
               {label.name}
             </SelectItem>
           ))}
-          <SelectItem value={"all"} className="capitalize">
-            All
-          </SelectItem>
         </SelectContent>
       </Select>
 
@@ -118,4 +117,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default FilterForm;

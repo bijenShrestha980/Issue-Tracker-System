@@ -11,8 +11,9 @@ export const issueSchema = z.object({
 });
 
 export const issueListSchema = z.object({
-  data: z.array(issueSchema),
-  paginate: paginateSchema,
+  statusCode: z.number(),
+  issues: z.array(issueSchema),
+  pagination: paginateSchema,
 });
 
 export type Issue = z.infer<typeof issueSchema>;
